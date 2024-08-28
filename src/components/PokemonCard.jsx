@@ -1,18 +1,9 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { usePokemon } from "../context/PokemonContext";
 
-const PokemonCard = ({ pokemon, addPokemon, isSelected }) => {
+const PokemonCard = ({ pokemon }) => {
+  const { addPokemon } = usePokemon();
   const navigate = useNavigate();
-
-  const addPokemonHandler = (e) => {
-    e.stopPropagation();
-
-    if (isSelected) {
-      alert("이미 추가된 포켓몬 입니다");
-    } else {
-      addPokemon(pokemon);
-    }
-  };
 
   return (
     <div onClick={() => navigate(`/detail/${pokemon.id}`)}>
@@ -22,7 +13,10 @@ const PokemonCard = ({ pokemon, addPokemon, isSelected }) => {
         style={{
           backgroundColor: "red",
         }}
-        onClick={addPokemonHandler}
+        onClick={(e) => {
+          e.stopPropagation();
+          addPokemon(pokemon);
+        }}
       >
         추가
       </button>

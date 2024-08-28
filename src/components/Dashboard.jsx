@@ -1,9 +1,7 @@
-import React from "react";
+import { usePokemon } from "../context/PokemonContext";
 
-const Dashboard = ({ selectedPokemon, removePokemon }) => {
-  const removePokemonHandler = (pokemon) => {
-    removePokemon(pokemon);
-  };
+const Dashboard = () => {
+  const { selectedPokemon, removePokemon } = usePokemon();
   return (
     <div>
       <h2>대시보드</h2>
@@ -14,9 +12,7 @@ const Dashboard = ({ selectedPokemon, removePokemon }) => {
           {selectedPokemon.map((pokemon) => (
             <li key={pokemon.id}>
               {pokemon.korean_name}
-              <button onClick={() => removePokemonHandler(pokemon)}>
-                삭제
-              </button>
+              <button onClick={() => removePokemon(pokemon)}>삭제</button>
             </li>
           ))}
         </ul>

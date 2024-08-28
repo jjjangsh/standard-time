@@ -1,7 +1,8 @@
-import React from "react";
 import PokemonCard from "./PokemonCard";
+import { usePokemon } from "../context/PokemonContext";
 
-const PokemonList = ({ pokemonList, addPokemon, selectedPokemon }) => {
+const PokemonList = () => {
+  const { pokemonList } = usePokemon();
   return (
     <div
       style={{
@@ -10,15 +11,7 @@ const PokemonList = ({ pokemonList, addPokemon, selectedPokemon }) => {
       }}
     >
       {pokemonList.map((pokemon) => {
-        const isSelected = selectedPokemon.some((p) => p.id === pokemon.id);
-        return (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            addPokemon={addPokemon}
-            isSelected={isSelected}
-          />
-        );
+        return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
       })}
     </div>
   );
